@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cucian Mobil</title>
+</head>
+<body>
+
+    <h1>Selamat datang di Cucian Mobil Kami</h1>
+
+    <form id="cucianForm">
+        <label for="nama">Nama Mobil:</label>
+        <input type="text" id="nama" name="nama" required><br>
+
+        <label for="plat">Plat Mobil:</label>
+        <input type="text" id="plat" name="plat" required><br>
+
+        <label for="kunjungan">Kunjungan ke-</label>
+        <input type="number" id="kunjungan" name="kunjungan" min="1" required><br>
+
+        <h2>Menu Cucian Mobil:</h2>
+        <input type="checkbox" id="cuci" name="cuci" value="50000">
+        <label for="cuci">Cuci Mobil (Rp50.000)</label><br>
+
+        <input type="checkbox" id="hidrolik" name="hidrolik" value="70000">
+        <label for="hidrolik">Cuci dengan Hidrolik (Rp70.000)</label><br>
+
+        <input type="checkbox" id="poles-dalem" name="poles-dalem" value="150000">
+        <label for="poles-dalem">Mempoles Bagian Dalam (Rp150.000)</label><br>
+
+        <input type="checkbox" id="poles-luar" name="poles-luar" value="150000">
+        <label for="poles-luar">Mempoles Bagian Luar (Rp150.000)</label><br>
+
+        <input type="checkbox" id="poles-mesin" name="poles-mesin" value="200000">
+        <label for="poles-mesin">Mempoles Bagian Mesin (Rp200.000)</label><br>
+
+        <input type="checkbox" id="poles-semua" name="poles-semua" value="400000">
+        <label for="poles-semua">Mempoles Semua Bagian (Rp400.000)</label><br>
+
+        <label for="jumlah">Jumlah Kunjungan:</label>
+        <input type="number" id="jumlah" name="jumlah" min="1" required><br>
+
+        <button type="button" onclick="hitungTotal()">Hitung Total</button>
+    </form>
+
+    <p id="total-harga">Total Harga: <span id="result">-</span></p>
+
+    <p id="diskon">Diskon 10% untuk kunjungan lebih dari 10</p>
+
+    <p>Terimakasih telah mengunjungi cucian mobil kami. Semoga datang kembali!</p>
+
+    <script>
+        function hitungTotal() {
+            // Mendapatkan nilai dari checkbox yang dicentang
+            var checkboxes = document.querySelectorAll('input[name="cuci"]:checked, input[name="hidrolik"]:checked, input[name="poles-dalem"]:checked, input[name="poles-luar"]:checked, input[name="poles-mesin"]:checked, input[name="poles-semua"]:checked');
+            
+            var total = 0;
+            checkboxes.forEach(function (checkbox) {
+                total += parseInt(checkbox.value);
+            });
+
+            // Menerapkan diskon jika kunjungan lebih dari 10
+            var jumlahKunjungan = document.getElementById('jumlah').value;
+            if (jumlahKunjungan > 10) {
+                total *= 0.9; // Diskon 10%
+            }
+
+            // Menampilkan hasil total
+            document.getElementById('result').innerText = "Rp" + total.toLocaleString();
+        }
+    </script>
+
+</body>
+</html>
